@@ -1,19 +1,13 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Fragment } from 'react';
+import { View } from 'react-native';
+import StatusBar from 'react-native-custom-statusbar'
+import Router from './src/routers'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hello World!</Text>
-    </View>
+    <Fragment>
+      <StatusBar backgroundColor="#0e5895" />
+      <Router />
+    </Fragment>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
