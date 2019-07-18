@@ -2,7 +2,6 @@ import React from 'react'
 import { View, Button, StyleSheet } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import Logo from './../components/Logo'
-import Input from './../components/Input'
 
 export default props => {
   const verifyLogin = () => {
