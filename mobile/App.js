@@ -5,9 +5,9 @@ import Router from './src/routers'
 
 export default function App() {
   return (
-    <Fragment>
+    <View style={{ flex: 1 }}>
       <StatusBar backgroundColor="#0e5895" />
       <Router />
-    </Fragment>
+    </View>
   );
 }
