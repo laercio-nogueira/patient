@@ -7,7 +7,7 @@ import Legend from './../../components/Legend'
 
 export default props => {
   const componentList = ({item, index}) => (
-    <Card containerStyle={item.status ? style.active : style.canceled}>
+    <Card containerStyle={item.status ? style.active : style.canceled} key={item.id}>
       <Text>{item.doctor}</Text>
       <Text>{item.date}</Text>
       <Text>{item.hour}</Text>
@@ -18,7 +18,7 @@ export default props => {
           <Button 
             primary 
             containerStyle={style.button} 
-            onPress={() => Actions.pageScheduleConsultation()} 
+            onPress={() => Actions.pageScheduleConsultation({ id: item.id })} 
             title="Editar"
             size={20} 
           /> : 
