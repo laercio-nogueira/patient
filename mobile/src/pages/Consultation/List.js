@@ -2,15 +2,16 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { View, FlatList, Text,  StyleSheet, TextInput } from 'react-native'
 import { Button, Card } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux'
+import moment from 'moment'
 import Service from '../../services/consumer'
 import Header from '../../components/Header'
-import { connect } from 'react-redux'
 
 const List = props => {
   const componentList = ({item, index}) => (
     <Card containerStyle={item.status ? style.active : style.canceled} key={item.id}>
       <Text>{item.doctor}</Text>
-      <Text>{item.date}</Text>
+      <Text>{moment(item.date).format("MM/DD/YYYY")}</Text>
       <Text>{item.hour}</Text>
       <Text>{item.hospital}</Text>
       <Text>{item.status ? 'Aberto' : 'Cancelado'}</Text>
