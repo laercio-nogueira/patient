@@ -1,12 +1,9 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, FlatList, Text,  StyleSheet, TextInput } from 'react-native'
-import { Button, Card } from 'react-native-elements';
-import { Actions } from 'react-native-router-flux'
+import { Card } from 'react-native-elements';
+import { connect } from 'react-redux'
 import Service from '../../services/doctor'
 import Header from '../../components/Header'
-import { connect } from 'react-redux'
-import moment from 'moment'
-import 'moment/locale/pt-br'
 
 const List = props => {
 
