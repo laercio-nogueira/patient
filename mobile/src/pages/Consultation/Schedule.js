@@ -7,6 +7,7 @@ import Legend from '../../components/Legend'
 import Select from '../../components/Select'
 import Date from '../../components/Date'
 import Service from '../../services/consumer'
+import Header from '../../components/Header'
 
 const Schedule = props => {
 
@@ -30,11 +31,13 @@ const Schedule = props => {
   let saveData = () => {
     Service.saveNewConsultation(props.data)
       .then(({data, status}) => popUpAlert("Consulta agendada com sucesso", 1))
+      .catch(err => console.log(err))
   }
 
   let editData = () => {
     Service.editConsultation(props.data, props.id)
-      .then(({data, status}) => console.log(data))
+      .then(({data, status}) => popUpAlert("Consulta atualizada com sucesso", 1))
+      .catch(err => console.log(err))
   }
 
   let handleClick = () => {
@@ -61,56 +64,59 @@ const Schedule = props => {
   }
 
   return (
-    <View style={style.box}>
-      <Legend title="Consulta" />
-      <Select 
-        title="Doutor" 
-        data={props.doctor} 
-        handleChange={value => { props.setData({...props.data, doctor: value}) }}
-        selected={props.data.doctor}
-        placeholder="Selecione um doutor"
-      />
+    <View>
+      <Header />
+      <View style={style.box}>
+        <Legend title="Consulta" />
+        <Select 
+          title="Doutor" 
+          data={props.doctor} 
+          handleChange={value => { props.setData({...props.data, doctor: value}) }}
+          selected={props.data.doctor}
+          placeholder="Selecione um doutor"
+        />
 
-      <Select 
-        title="Hospital" 
-        data={props.hospital} 
-        handleChange={value => { props.setData({...props.data, hospital: value}) }}
-        selected={props.data.hospital}
-        placeholder="Selecione um hospital"
-      />
+        <Select 
+          title="Hospital" 
+          data={props.hospital} 
+          handleChange={value => { props.setData({...props.data, hospital: value}) }}
+          selected={props.data.hospital}
+          placeholder="Selecione um hospital"
+        />
 
-      <Date
-        title="Data Consulta" 
-        handleChange={value => { props.setData({...props.data, date: value}) }}
-        defaultDate={props.data.date}
-        placeHolderText="Selecione uma data"
-      />
+        <Date
+          title="Data Consulta" 
+          handleChange={value => { props.setData({...props.data, date: value}) }}
+          defaultDate={props.data.date}
+          placeHolderText="Selecione uma data"
+        />
 
-      <Select 
-        title="Hora" 
-        data={hour} 
-        handleChange={value => props.setData({...props.data, hour: value}) }
-        selected={props.data.hour}
-        placeholder="Selecione um horario"
-      />
+        <Select 
+          title="Hora" 
+          data={hour} 
+          handleChange={value => props.setData({...props.data, hour: value}) }
+          selected={props.data.hour}
+          placeholder="Selecione um horario"
+        />
 
-      <Button 
-        primary 
-        onPress={() => handleClick()} 
-        title="Enviar"
-        size={20} 
-      />
-
-      { props.id ?
         <Button 
-          buttonStyle={style.danger} 
-          onPress={() => canceledData()} 
-          title="Cancelar Consulta"
+          primary 
+          onPress={() => handleClick()} 
+          title="Enviar"
           size={20} 
-        /> :
-        <Fragment /> 
-      }
+        />
 
+        { props.id ?
+          <Button 
+            buttonStyle={style.danger} 
+            onPress={() => canceledData()} 
+            title="Cancelar Consulta"
+            size={20} 
+          /> :
+          <Fragment /> 
+        }
+
+      </View>
     </View>
   )
 }
@@ -150,6 +156,7 @@ export default compose(
           console.log(resp.data[0])
           this.props.setData({...resp.data[0]})
         })
+        .catch(err => console.log(err))
       }  
     }
   })
