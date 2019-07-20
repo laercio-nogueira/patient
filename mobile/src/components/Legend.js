@@ -7,8 +7,12 @@ export default props => (
 
 const style = StyleSheet.create({
   title: {
-    margin: 15,
+    marginTop: 10,
+    marginBottom: 10,
     textAlign: 'center',
-    flexWrap: 'nowrap'
+    flexWrap: 'nowrap',
+    fontWeight: 'bold',
+    borderBottomWidth: 1,
+    borderColor: '#ddd'
   }
 })
