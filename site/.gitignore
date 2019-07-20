@@ -1,0 +1,6 @@
+node_modules
+dist
+package-lock.json
+static/*.png
+static/index.html
+static/main.js
