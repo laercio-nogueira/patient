@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Button, StyleSheet } from 'react-native'
-import { Actions } from 'react-native-router-flux'
 import Logo from './../components/Logo'
-import { Container, Content, Form, Item, Input, Label } from 'native-base';
+import { Item, Input, Label } from 'native-base';
+import Auth from '../middleware/Auth'
 
 export default props => {
+
+  let [user, setUser] = useState({
+    email: null,
+    password: null
+  })
+
   const verifyLogin = () => {
-    Actions.pageHome()
+    if (user.email && user.password) {
+      Auth(user)
+    }    
   }
 
   return(
@@ -15,11 +23,15 @@ export default props => {
         <View style={style.blockInput}>
           <Item inlineLabel>
             <Label>Email:</Label>
-            <Input />
+            <Input 
+              onChange={e => setUser({...user, email: e.nativeEvent.text.toLocaleLowerCase().trim()})}
+            />
           </Item>
           <Item inlineLabel last >
             <Label>Senha:</Label>
-            <Input password secureTextEntry={true}/>
+            <Input 
+              secureTextEntry={true}
+              onChange={e => setUser({...user, password: e.nativeEvent.text.trim()})}/>
           </Item>
         </View>
       <Button title="Clicar"  onPress={() => verifyLogin()}/>
