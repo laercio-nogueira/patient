@@ -1,4 +1,5 @@
 mobile/node_modules
 mobile/.expo
 site/node_modules
+site/static
 server/node_modules
