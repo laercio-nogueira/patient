@@ -2,7 +2,7 @@ var sql = require('../database/config');
 
 class Consultation {
   constructor (consultation) {
-    this.patient_id = 1
+    this.patient_id = consultation.patient
     this.doctor_id = consultation.doctor
     this.hospital_id = consultation.hospital
     this.date = consultation.date.substr(0, 10)
@@ -11,7 +11,7 @@ class Consultation {
   }
 }
 
-Consultation.getAllConsultation = result => {
+Consultation.getAllConsultation = (id, result) => {
   let select = `SELECT 
     doctor.name as doctor, 
     hospital.name as hospital, 
@@ -22,7 +22,7 @@ Consultation.getAllConsultation = result => {
       FROM consultation
       INNER JOIN doctor ON consultation.doctor_id = doctor.id
       INNER JOIN hospital ON consultation.hospital_id = hospital.id
-      WHERE consultation.patient_id = 1`
+      WHERE consultation.patient_id = ${id}`
     
   sql.query(select, (err, resp) => {
     if (err) {
