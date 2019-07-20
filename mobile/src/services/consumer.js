@@ -1,25 +1,33 @@
 import axios from 'axios'
+import store from '../store'
 
 export default {
   getListConsultation () {
-    return axios.get('http://192.168.2.100:3000/consultation')
+    const token = store.getState().user.token
+    return axios.get(`http://192.168.2.100:3000/consultation`, { headers: { token } })
   },
   getConsultationById (id) {
-    return axios.get(`http://192.168.2.100:3000/consultation/${id}`)
+    const token = store.getState().user.token
+    return axios.get(`http://192.168.2.100:3000/consultation/${id}`, { headers: { token } })
   },
   saveNewConsultation (data) {
-    return axios.post('http://192.168.2.100:3000/consultation', data)
+    const token = store.getState().user.token
+    return axios.post('http://192.168.2.100:3000/consultation', data, { headers: { token } })
   },
   editConsultation (data, id) {
-    return axios.put(`http://192.168.2.100:3000/consultation/${id}`, data)
+    const token = store.getState().user.token
+    return axios.put(`http://192.168.2.100:3000/consultation/${id}`, data, { headers: { token } })
   },
   cancelConsultation (id) {
-    return axios.put(`http://192.168.2.100:3000/consultation/${id}/cancel`)
+    const token = store.getState().user.token
+    return axios.delete(`http://192.168.2.100:3000/consultation/${id}`, { headers: { token } })
   },
   getListDoctor () {
-    return axios.get('http://192.168.2.100:3000/doctor')
+    const token = store.getState().user.token
+    return axios.get('http://192.168.2.100:3000/doctor', { headers: { token } })
   },
   getListHospital () {
-    return axios.get('http://192.168.2.100:3000/hospital')
+    const token = store.getState().user.token
+    return axios.get('http://192.168.2.100:3000/hospital', { headers: { token } })
   }
 }
